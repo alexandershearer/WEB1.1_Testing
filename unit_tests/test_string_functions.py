@@ -23,36 +23,41 @@ def test_greeting_dani():
 
 def test_reverse_long():
     """Test reversing a long string."""
-    expected = ''
-    actual = ''
+    expected = 'gfedcba'
+    actual = reverse('abcdefg')
     assert actual == expected
 
 def test_reverse_short():
     """Test reversing a short string."""
-    expected = ''
-    actual = ''
+    expected = 'cba'
+    actual = reverse('abc')
     assert actual == expected
 
 def test_reverse_words_long():
     """Test reversing words in a long string."""
-    expected = ''
-    actual = ''
+    expected = 'citemhtirA'
+    actual = reverse_words('Arithmetic')
     assert actual == expected
 
 def test_reverse_words_short():
     """Test reversing words in a short string."""
-    expected = ''
-    actual = ''
+    expected = 'olleH'
+    actual = reverse_words('Hello')
     assert actual == expected
 
 def test_sarcastic_long():
     """Test sarcastic-ifying a long string."""
-    expected = ''
-    actual = ''
+    expected = 'YoU gO tO tHe GrOcErY'
+    actual = sarcastic('You go to the grocery')
     assert actual == expected
 
 def test_sarcastic_short():
     """Test sarcastic-ifying a short string."""
+    expected = 'YoU dO iT'
+    actual = sarcastic('You do it')
+    assert actual == expected
+
+def test_find_longest_word():
     expected = ''
     actual = ''
     assert actual == expected

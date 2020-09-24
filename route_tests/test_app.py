@@ -30,30 +30,57 @@ def test_color_results_blue():
     expected_page_text = 'Wow, blue is my favorite color, too!'
     assert expected_page_text == result_page_text
 
-def test_color_results_scenario1():
+def test_color_results_light_green():
     # TODO: Fill in this function to test the color_results route under 
     # a specific scenario.
-    pass
+    result = app.test_client().get('/color_results?color=light%20green')
 
-def test_color_results_edgecase1():
+    assert result.status_code == 200
+
+    result_page_text = result.get_data(as_text=True)
+    expected_page_text = 'Wow, light green is my favorite color, too!'
+    assert expected_page_text == result_page_text
+
+
+def test_color_results_empty():
     # TODO: Fill in this function to test the color_results route under 
     # an edge case scenario.
-    pass
+    result = app.test_client().get('/color_results?color=')
+
+    assert result.status_code == 200
+
+    result_page_text = result.get_data(as_text=True)
+    expected_page_text = 'You didnt specify a color!'
+    assert expected_page_text == result_page_text
+
 
 
 #######################
 # Froyo Tests
 #######################
 
-def test_froyo_results_scenario1():
+def test_froyo_results_chocolate():
     # TODO: Fill in this function to test the show_froyo_results route under a
     # specific scenario.
-    pass
+    result = app.test_client().get('/froyo_results?flavor=chocoloate&toppings=syrup')
 
-def test_froyo_results_scenario2():
+    assert result.status_code == 200
+
+    result_page_text = result.get_data(as_text=True)
+    expected_page_text = 'You ordered chocolate flavored Fro-Yo with toppings syrup!'
+    assert expected_page_text == result_page_text
+    
+
+def test_froyo_results_strawberry():
     # TODO: Fill in this function to test the show_froyo_results route under a
     # specific scenario.
-    pass
+    result = app.test_client().get('/froyo_results?flavor=strawberry&toppings=sprinkles!')
+
+    assert result.status_code == 200
+
+    result_page_text = result.get_data(as_text=True)
+    expected_page_text = 'You ordered chocolate flavored Fro-Yo with toppings sprinkles'
+    assert expected_page_text == result_page_text
 
 def test_froyo_results_edgecase1():
     # TODO: Fill in this function to test the show_froyo_results route under a
