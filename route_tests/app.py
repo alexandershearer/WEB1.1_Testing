@@ -47,7 +47,10 @@ def choose_froyo():
 def show_froyo_results():
     users_froyo_flavor = request.args.get('flavor')
     toppings = request.args.get('toppings')
-    return f'You ordered {users_froyo_flavor} flavored Fro-Yo with toppings {toppings}!'
+    if users_froyo_flavor != '':
+        return f'You ordered {users_froyo_flavor} flavored Fro-Yo with toppings {toppings}!'
+    else:
+        return "Please input your favorite flavor and topping."
 
 
 @app.route('/reverse_message')
@@ -64,10 +67,13 @@ def reverse_message_form():
 def message_results():
     message = request.form.get('message')
     reversed_message = reverse(message)
-    return f'Here\'s your reversed message: {reversed_message}'
+    if message == '':
+        return "Please enter a message."
+    else:
+        return f'Here\'s your reversed message: {reversed_message}'
 
 
-@app.route('/calculator')
+@app.route('/calculator', methods=['POST'])
 def calculator():
     return """
     <form action="/calculator_results" method="GET">
@@ -84,12 +90,17 @@ def calculator():
     </form>
     """
 
-@app.route('/calculator_results')
+
+@app.route('/calculator_results', methods=['POST'])
 def calculator_results():
-    operand1 = int(request.args.get('operand1'))
-    operand2 = int(request.args.get('operand2'))
-    operation = request.args.get('operation')
-    if operation == 'add':
+    operand1 = int(request.form.get('operand1'))
+    operand2 = int(request.form.get('operand2'))
+    operation = request.form.get('operation')
+    if operand1 == None or operand2 == None:
+        print("Please check to see if you input two numbers.")
+    elif operation == None:
+        print("Please select an operation.")
+    elif operation == 'add':
         result = operand1 + operand2
     elif operation == 'subtract':
         result = operand1 - operand2
