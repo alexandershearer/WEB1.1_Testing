@@ -58,9 +58,11 @@ def test_sarcastic_short():
     assert actual == expected
 
 def test_find_longest_word():
-    expected = ''
-    actual = ''
-    assert actual == expected
+    with pytest.raises(Exception):
+        expected = ''
+        actual = find_longest_word()
+        
+        assert actual == expected
 
 # run the tests
 if __name__ == '__main__':
