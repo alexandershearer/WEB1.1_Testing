@@ -96,11 +96,12 @@ def calculator_results():
     operand1 = int(request.form.get('operand1'))
     operand2 = int(request.form.get('operand2'))
     operation = request.form.get('operation')
-    if operand1 == None or operand2 == None:
-        print("Please check to see if you input two numbers.")
-    elif operation == None:
-        print("Please select an operation.")
-    elif operation == 'add':
+#    if operand1 == None or operand2 == None:
+#       print("Please check to see if you input two numbers.")
+#    elif operation == None:
+#       print("Please select an operation.")
+        
+    if operation == 'add':
         result = operand1 + operand2
     elif operation == 'subtract':
         result = operand1 - operand2
