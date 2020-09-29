@@ -31,8 +31,6 @@ def test_color_results_blue():
     assert expected_page_text == result_page_text
 
 def test_color_results_light_green():
-    # TODO: Fill in this function to test the color_results route under 
-    # a specific scenario.
     result = app.test_client().get('/color_results?color=light%20green')
 
     assert result.status_code == 200
@@ -43,8 +41,6 @@ def test_color_results_light_green():
 
 
 def test_color_results_empty():
-    # TODO: Fill in this function to test the color_results route under 
-    # an edge case scenario.
     result = app.test_client().get('/color_results?color=')
 
     assert result.status_code == 200
@@ -60,8 +56,6 @@ def test_color_results_empty():
 #######################
 
 def test_froyo_results_chocolate():
-    # TODO: Fill in this function to test the show_froyo_results route under a
-    # specific scenario.
     result = app.test_client().get('/froyo_results?flavor=chocolate&toppings=syrup')
 
     assert result.status_code == 200
@@ -72,8 +66,6 @@ def test_froyo_results_chocolate():
     
 
 def test_froyo_results_strawberry():
-    # TODO: Fill in this function to test the show_froyo_results route under a
-    # specific scenario.
     result = app.test_client().get('/froyo_results?flavor=strawberry&toppings=sprinkles')
 
     assert result.status_code == 200
@@ -83,8 +75,6 @@ def test_froyo_results_strawberry():
     assert expected_page_text == result_page_text
 
 def test_froyo_results_empty_flavor():
-    # TODO: Fill in this function to test the show_froyo_results route under a
-    # specific EDGE CASE scenario.
     result = app.test_client().get('/froyo_results?flavor=&toppings=sprinkles')
 
     assert result.status_code == 200
@@ -94,8 +84,6 @@ def test_froyo_results_empty_flavor():
     assert expected_page_text == result_page_text
 
 def test_froyo_results_empty_both():
-    # TODO: Fill in this function to test the show_froyo_results route under a
-    # specific EDGE CASE scenario.
     result = app.test_client().get('/froyo_results?flavor=&toppings=')
 
     assert result.status_code == 200
@@ -119,8 +107,6 @@ def test_message_results_helloworld():
     assert 'dlroW olleH' in result_page_text
 
 def test_message_results_welcomealex():
-    # TODO: Fill in this function to test the message_results route under 
-    # another scenario.
     form_data = {
         'message': 'Welcome Alex'
     }
@@ -131,8 +117,6 @@ def test_message_results_welcomealex():
     assert 'xelA emocleW' in result_page_text
 
 def test_message_results_blank():
-    # TODO: Fill in this function to test the message_results route under 
-    # an edge case scenario.
     form_data = {
         'message': ''
     }
@@ -148,8 +132,6 @@ def test_message_results_blank():
 #######################
 
 def test_calculator_results_add():
-    # TODO: Fill in this function to test the calculator_results route under a
-    # specific scenario.
     form_data = {
         'operand1': '2',
         'operand2': '2',
@@ -162,8 +144,6 @@ def test_calculator_results_add():
     assert 'You chose to add 2 and 2. Your result is: 4' in result_page_text
 
 def test_calculator_results_subtract():
-    # TODO: Fill in this function to test the calculator_results route under a
-    # specific scenario.
     form_data = {
         'operand1': '20',
         'operand2': '10',
@@ -176,8 +156,6 @@ def test_calculator_results_subtract():
     assert 'You chose to subtract 20 and 10. Your result is: 10' in result_page_text
 
 def test_calculator_results_multiply():
-    # TODO: Fill in this function to test the calculator_results route under a
-    # specific scenario.
     form_data = {
         'operand1': '5',
         'operand2': '20',
@@ -190,8 +168,6 @@ def test_calculator_results_multiply():
     assert 'You chose to multiply 5 and 20. Your result is: 100' in result_page_text
 
 def test_calculator_results_divide():
-    # TODO: Fill in this function to test the calculator_results route under a
-    # specific scenario.
     form_data = {
         'operand1': '75',
         'operand2': '5',
@@ -203,32 +179,26 @@ def test_calculator_results_divide():
     result_page_text = res.get_data(as_text=True)
     assert 'You chose to divide 75 and 5. Your result is: 15' in result_page_text
 
-def test_calculator_results_operands():
-    # TODO: Fill in this function to test the calculator_results route under a
-    # specific EDGE CASE scenario.
-    pass
-#    form_data = {
-#        'operand1': None,
-#        'operand2': '2',
-#        'operation': 'add'
-#    }
-#    res = app.test_client().post('/calculator_results', data=form_data)
-#    assert res.status_code == 200
+def test_calculator_results_empty():
+    form_data = {
+        'operand1': '',
+        'operand2': '',
+        'operation': 'add'
+    }
+    res = app.test_client().post('/calculator_results', data=form_data)
+    assert res.status_code == 200
 
-#    result_page_text = res.get_data(as_text=True)
-#    assert 'Please check to see if you input everything.' in result_page_text
+    result_page_text = res.get_data(as_text=True)
+    assert 'Please enter a valid number' in result_page_text
 
 def test_calculator_results_operation():
-    # TODO: Fill in this function to test the calculator_results route under a
-    # specific EDGE CASE scenario.
-    pass
-#    form_data = {
-#        'operand1': '2',
-#        'operand2': '2',
-#        'operation': None
-#    }
-#    res = app.test_client().post('/calculator_results', data=form_data)
-#    assert res.status_code == 200
+    form_data = {
+        'operand1': '12',
+        'operand2': '124',
+        'operation': ''
+    }
+    res = app.test_client().post('/calculator_results', data=form_data)
+    assert res.status_code == 200
 
-#    result_page_text = res.get_data(as_text=True)
-#    assert 'Please check to see if you input everything.' in result_page_text
+    result_page_text = res.get_data(as_text=True)
+    assert 'Please enter a valid operation' in result_page_text

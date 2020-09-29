@@ -93,14 +93,19 @@ def calculator():
 
 @app.route('/calculator_results', methods=['POST'])
 def calculator_results():
-    operand1 = int(request.form.get('operand1'))
-    operand2 = int(request.form.get('operand2'))
+
     operation = request.form.get('operation')
-#    if operand1 == None or operand2 == None:
-#       print("Please check to see if you input two numbers.")
-#    elif operation == None:
-#       print("Please select an operation.")
-        
+
+    try:
+        operand1 = int(request.form.get('operand1'))
+        operand2 = int(request.form.get('operand2'))
+    except ValueError:
+        return "Please enter a valid number"
+
+    if operation == '':
+        return "Please enter a valid operation"
+
+
     if operation == 'add':
         result = operand1 + operand2
     elif operation == 'subtract':
@@ -109,6 +114,7 @@ def calculator_results():
         result = operand1 * operand2
     else:
         result = operand1 / operand2
+
     return f'You chose to {operation} {operand1} and {operand2}. Your result is: {result}'
 
 
